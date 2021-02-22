@@ -1,18 +1,21 @@
-﻿CREATE TABLE [dbo].[User](
-	[Id] [nvarchar](200) NOT NULL,
-	[FirstName] [nvarchar](100) NULL,
-	[LastName] [nvarchar](100) NULL,
-	[BirthDate] [date] NULL,
-	[Gender] [nvarchar](10) NULL,
-	[PhoneNumber] [bigint] NULL,
-	[Email] [nvarchar](200) NOT NULL,
-	[Password] [nvarchar](200) NOT NULL,
-	[PasswordSalt] [nvarchar](100) NOT NULL,
-	[CreatedDateTime] [datetime] NOT NULL,
-	[ModifiedDateTime] [datetime] NOT NULL,
- CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
+﻿CREATE TABLE "User"
 (
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
-GO
+    user_id varchar(200) NOT NULL,
+    user_name varchar(200),
+    first_name varchar(200),
+    last_name varchar(200),
+    dob date,
+    gender varchar(200),
+    password varchar(1000),
+    CONSTRAINT "_user_pkey" PRIMARY KEY (user_id)
+);
+
+CREATE TABLE UserAsset
+(
+    user_id varchar(200) NOT NULL,
+    asset_id varchar(200) NOT NULL,
+    CONSTRAINT user_fkid FOREIGN KEY (user_id)
+        REFERENCES "User" (user_id) 
+        ON UPDATE CASCADE
+        ON DELETE CASCADE
+)

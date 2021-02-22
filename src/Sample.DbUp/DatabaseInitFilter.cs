@@ -19,8 +19,8 @@ namespace Sample.DbUp
         }
         public Action<IApplicationBuilder> Configure(Action<IApplicationBuilder> next)
         {
-            EnsureDatabase.For.SqlDatabase(_appConfigOptions.ConnectionString);
-            var builder = DeployChanges.To.SqlDatabase(_appConfigOptions.ConnectionString)
+            EnsureDatabase.For.PostgresqlDatabase(_appConfigOptions.ConnectionString);
+            var builder = DeployChanges.To.PostgresqlDatabase(_appConfigOptions.ConnectionString)
                                          .WithScriptsEmbeddedInAssembly(typeof(DatabaseInitFilter).Assembly)
                                          .WithTransaction()
                                          .LogTo(_logger);
